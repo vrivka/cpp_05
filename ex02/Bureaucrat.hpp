@@ -32,6 +32,7 @@ public:
 	void incrementGrade();
 	void decrementGrade();
 	void signForm( Form & ) const;
+	void executeForm( Form const & ) const;
 	Bureaucrat();
 	Bureaucrat( std::string const &, int );
 	Bureaucrat( Bureaucrat const & );

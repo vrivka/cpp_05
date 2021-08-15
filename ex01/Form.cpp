@@ -24,7 +24,7 @@ int const &Form::getExecGrade() const {
 	return this->execGrade;
 }
 
-void Form::beSigned( Bureaucrat const &bureaucrat ) {
+void Form::beSigned( Bureaucrat const &bureaucrat ) throw(Form::GradeTooLowException)  {
 	if (bureaucrat.getGrade() > this->getSignGrade())
 		throw GradeTooLowException("grade too low for singing");
 	this->isSigned = true;

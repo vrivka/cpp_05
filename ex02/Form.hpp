@@ -7,8 +7,9 @@
 class Bureaucrat;
 
 class Form {
-private:
+protected:
 	std::string const Name;
+	std::string target;
 	bool isSigned;
 	int const signGrade;
 	int const execGrade;
@@ -33,11 +34,12 @@ public:
 	bool getIsSigned() const;
 	int const &getSignGrade() const;
 	int const &getExecGrade() const;
-	void beSigned( Bureaucrat const & ) throw(GradeTooLowException);
+	void beSigned( Bureaucrat const & ) throw(Form::GradeTooLowException);
+	virtual void execute( Bureaucrat const & ) const = 0;
 	Form();
-	Form( std::string const &name, bool isSigned, int const &toSign, int const &toExec);
+	Form( std::string const &, std::string const &, bool , int const &, int const &);
 	Form( Form const & );
-	~Form();
+	virtual ~Form();
 	Form &operator=( Form const & );
 };
 

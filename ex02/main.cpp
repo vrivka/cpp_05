@@ -1,19 +1,19 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include "Form.hpp"
 
 int main() {
 	try {
-		Bureaucrat vasya("Vasya", 125);
-		Form Order66("Order 66", false, 124, 1);
+		Bureaucrat vasya("Vasya", 20);
+		ShrubberyCreationForm abs("apple");
 
-		std::cout << Order66 << std::endl;
-		vasya.signForm(Order66);
-		std::cout << vasya << std::endl;
-		vasya.incrementGrade();
-		std::cout << vasya << std::endl;
-		vasya.signForm(Order66);
-		std::cout << Order66 << std::endl;
+		std::cout << abs << std::endl;
+		vasya.executeForm(abs);
+		vasya.signForm(abs);
+		vasya.executeForm(abs);
 	}
 	catch (std::exception &exception) {
 		std::cout << exception.what() << std::endl;

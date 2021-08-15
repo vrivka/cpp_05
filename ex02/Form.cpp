@@ -24,7 +24,7 @@ int const &Form::getExecGrade() const {
 	return this->execGrade;
 }
 
-void Form::beSigned( Bureaucrat const &bureaucrat ) {
+void Form::beSigned( Bureaucrat const &bureaucrat ) throw(Form::GradeTooLowException) {
 	if (bureaucrat.getGrade() > this->getSignGrade())
 		throw GradeTooLowException("grade too low for singing");
 	this->isSigned = true;
@@ -33,7 +33,7 @@ void Form::beSigned( Bureaucrat const &bureaucrat ) {
 
 Form::Form() : Name("Default"), isSigned(false), signGrade(150), execGrade(150) {}
 
-Form::Form(const std::string &name, bool isSigned, int const &toSign, int const &toExec) : Name(name), isSigned(isSigned), signGrade(toSign), execGrade(toExec) {
+Form::Form( std::string const &name, std::string const &target, bool isSigned, int const &toSign, int const &toExec ) : Name(name), target(target), isSigned(isSigned), signGrade(toSign), execGrade(toExec) {
 	if (toSign > 150)
 		throw GradeTooLowException("Cannot create form, because grade to sign too low!");
 	else if (toSign < 1)
@@ -49,6 +49,7 @@ Form::Form( Form const &other ) : Name(other.Name), isSigned(other.isSigned), si
 Form::~Form() {}
 
 Form &Form::operator=( Form const &other ) {
+	this->target = other.target;
 	this->isSigned = other.isSigned;
 	return *this;
 }

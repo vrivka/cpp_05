@@ -47,6 +47,15 @@ void Bureaucrat::signForm( Form &form ) const {
 	}
 }
 
+void Bureaucrat::executeForm( Form const &form ) const {
+	try {
+		form.execute(*this);
+	}
+	catch (std::exception &exception) {
+		std::cout << this->Name << " cannot execute " << form.getName() << " because " << exception.what() << std::endl;
+	}
+}
+
 Bureaucrat::Bureaucrat() : Name("\"Mommy's bureaucrat\""), Grade(150) {}
 
 Bureaucrat::Bureaucrat( std::string const &name, int grade ) : Name(name) {
