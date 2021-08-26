@@ -25,7 +25,6 @@ void Bureaucrat::incrementGrade() {
 	catch (std::exception &exeption) {
 		std::cout << exeption.what() << std::endl;
 	}
-
 }
 
 void Bureaucrat::decrementGrade() {
@@ -36,6 +35,24 @@ void Bureaucrat::decrementGrade() {
 	}
 	catch (std::exception &exeption) {
 		std::cout << exeption.what() << std::endl;
+	}
+}
+
+void Bureaucrat::signForm( Form &form ) const {
+	try {
+		form.beSigned(*this);
+	}
+	catch (std::exception &exception) {
+		std::cout << this->Name << " cannot sign " << form.getName() << " because " << exception.what() << std::endl;
+	}
+}
+
+void Bureaucrat::executeForm( Form const &form ) const {
+	try {
+		form.execute(*this);
+	}
+	catch (std::exception &exception) {
+		std::cout << this->Name << " cannot execute " << form.getName() << " because " << exception.what() << std::endl;
 	}
 }
 

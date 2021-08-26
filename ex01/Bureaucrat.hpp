@@ -12,12 +12,20 @@ private:
 	int Grade;
 public:
 	class GradeTooHighException : public std::exception {
+	protected:
+		std::string massage;
 	public:
-		char const *TooHigh() const throw();
+		GradeTooHighException( std::string const &massage ) throw() : massage(massage) {}
+		virtual ~GradeTooHighException() throw() {}
+		virtual char const *what() const throw();
 	};
 	class GradeTooLowException : public std::exception {
+	protected:
+		std::string massage;
 	public:
-		char const *TooLow() const throw();
+		GradeTooLowException( std::string const &massage ) throw() : massage(massage) {}
+		virtual ~GradeTooLowException() throw() {}
+		virtual char const *what() const throw();
 	};
 	std::string const &getName() const;
 	int getGrade() const;

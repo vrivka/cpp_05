@@ -1,11 +1,11 @@
 #include "Bureaucrat.hpp"
 
-const char *Bureaucrat::GradeTooHighException::TooHigh() const throw() {
-	return "Grade too high";
+const char *Bureaucrat::GradeTooHighException::what() const throw() {
+	return massage.c_str();
 }
 
-const char *Bureaucrat::GradeTooLowException::TooLow() const throw() {
-	return "Grade too low";
+const char *Bureaucrat::GradeTooLowException::what() const throw() {
+	return massage.c_str();
 }
 
 std::string const &Bureaucrat::getName() const {
@@ -19,48 +19,45 @@ int Bureaucrat::getGrade() const {
 void Bureaucrat::incrementGrade() {
 	try {
 		if (this->Grade == 1)
-			throw GradeTooHighException();
+			throw GradeTooHighException("Cannot increment grade, because its to high!");
 		this->Grade--;
 	}
-	catch (GradeTooHighException &exception) {
-		std::cout << "Cannot increment grade because " << exception.TooHigh() << " already" << std::endl;
+	catch (std::exception &exeption) {
+		std::cout << exeption.what() << std::endl;
 	}
 }
 
 void Bureaucrat::decrementGrade() {
 	try {
 		if (this->Grade == 150)
-			throw GradeTooLowException();
+			throw GradeTooLowException("Cannot decrement grade, because its to low!");
 		this->Grade++;
 	}
-	catch (GradeTooLowException &exception) {
-		std::cout << "Cannot increment grade because " << exception.TooLow() << " already" << std::endl;
+	catch (std::exception &exeption) {
+		std::cout << exeption.what() << std::endl;
 	}
 }
 
 void Bureaucrat::signForm( Form &form ) const {
-	form.beSigned(*this);
+	try {
+		form.beSigned(*this);
+	}
+	catch (std::exception &exception) {
+		std::cout << this->Name << " cannot sign " << form.getName() << " because " << exception.what() << std::endl;
+	}
 }
 
 Bureaucrat::Bureaucrat() : Name("\"Mommy's bureaucrat\""), Grade(150) {}
 
 Bureaucrat::Bureaucrat( std::string const &name, int grade ) : Name(name) {
-	try {
-		if (grade < 1)
-			throw GradeTooHighException();
-		else if (grade > 150)
-			throw GradeTooLowException();
-		this->Grade = grade;
-	}
-	catch (GradeTooHighException &exception) {
-		std::cout << exception.TooHigh() << std::endl;
-	}
-	catch (GradeTooLowException &exception) {
-		std::cout << exception.TooLow() << std::endl;
-	}
+	if (grade < 1)
+		throw GradeTooHighException("Cannot create bureaucrat, because his grade to high!");
+	else if (grade > 150)
+		throw GradeTooLowException("Cannot create bureaucrat, because his grade to low!");
+	this->Grade = grade;
 }
 
-Bureaucrat::Bureaucrat( const Bureaucrat &other ) : Name(other.Name), Grade(other.Grade) {}
+Bureaucrat::Bureaucrat( Bureaucrat const &other ) : Name(other.Name), Grade(other.Grade) {}
 
 Bureaucrat::~Bureaucrat() {}
 
