@@ -3,20 +3,82 @@
 #include "Form.hpp"
 
 int main() {
-	try {
-		Bureaucrat vasya("Vasya", 125);
-		Form Order66("Order 66", false, 124, 1);
+	{
+		try {
+			Form divine("Divine", false, 151, 150);
+		}
+		catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+	}
+	std::cout << "\n";
+	{
+		try {
+			Form divine("Divine", false, 0, 150);
+		}
+		catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+	}
+	std::cout << "\n";
 
-		std::cout << Order66 << std::endl;
-		vasya.signForm(Order66);
-		std::cout << vasya << std::endl;
-		vasya.incrementGrade();
-		std::cout << vasya << std::endl;
-		vasya.signForm(Order66);
-		std::cout << Order66 << std::endl;
+	{
+		try {
+			Form divine("Divine", false, 150, 151);
+		}
+		catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
 	}
-	catch (std::exception &exception) {
-		std::cout << exception.what() << std::endl;
+	std::cout << "\n";
+	{
+		try {
+			Form divine("Divine", false, 150, 0);
+		}
+		catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
 	}
-	return 0;
+	std::cout << "\n";
+	{
+		try {
+			Bureaucrat vasya("Vasay", 30);
+			Form divine("Divine", false, 43, 15);
+
+			std::cout << divine << std::endl;
+			std::cout << vasya << std::endl;
+			vasya.signForm(divine);
+		}
+		catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+	}
+	std::cout << "\n";
+	{
+		try {
+			Bureaucrat vasya("Vasya", 44);
+			Form divine("Divine", false, 43, 15);
+
+			std::cout << divine << std::endl;
+			std::cout << vasya << std::endl;
+			vasya.signForm(divine);
+		}
+		catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+	}
+	std::cout << "\n";
+	{
+		try {
+			Bureaucrat vasya("Vasya", 43);
+			Form divine("Divine", true, 43, 15);
+
+			std::cout << divine << std::endl;
+			std::cout << vasya << std::endl;
+			vasya.signForm(divine);
+		}
+		catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+	}
 }

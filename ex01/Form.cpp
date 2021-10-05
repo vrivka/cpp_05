@@ -1,47 +1,36 @@
 #include "Form.hpp"
 
-const char *Form::GradeTooHighException::what() const throw() {
-	return massage.c_str();
-}
+char const *Form::GradeTooHighException::what() const throw() { return massage.c_str(); }
 
-const char *Form::GradeTooLowException::what() const throw() {
-	return massage.c_str();
-}
+char const *Form::GradeTooLowException::what() const throw() { return massage.c_str(); }
 
-std::string const &Form::getName() const {
-	return this->Name;
-}
+std::string const &Form::getName() const { return this->Name; }
 
-bool Form::getIsSigned() const {
-	return this->isSigned;
-}
+bool Form::getIsSigned() const { return this->isSigned; }
 
-int const &Form::getSignGrade() const {
-	return this->signGrade;
-}
+int const &Form::getSignGrade() const { return this->signGrade; }
 
-int const &Form::getExecGrade() const {
-	return this->execGrade;
-}
+int const &Form::getExecGrade() const { return this->execGrade; }
 
-void Form::beSigned( Bureaucrat const &bureaucrat ) throw(Form::GradeTooLowException)  {
+void Form::beSigned( Bureaucrat const &bureaucrat ) throw(Form::GradeTooLowException) {
 	if (bureaucrat.getGrade() > this->getSignGrade())
-		throw GradeTooLowException("grade too low for singing");
+		throw GradeTooLowException("bureaucrat's grade too low for singing");
+	if (this->isSigned)
+		return ;
 	this->isSigned = true;
-	std::cout << bureaucrat.getName() << " signs " << this->getName() << std::endl;
 }
 
 Form::Form() : Name("Default"), isSigned(false), signGrade(150), execGrade(150) {}
 
 Form::Form(const std::string &name, bool isSigned, int const &toSign, int const &toExec) : Name(name), isSigned(isSigned), signGrade(toSign), execGrade(toExec) {
 	if (toSign > 150)
-		throw GradeTooLowException("Cannot create form, because grade to sign too low!");
+		throw GradeTooLowException("Cannot create form " + name + ", because grade to sign too low!");
 	else if (toSign < 1)
-		throw GradeTooHighException("Cannot create form, because grade to sign too high!");
+		throw GradeTooHighException("Cannot create form " + name + ", because grade to sign too high!");
 	else if (toExec > 150)
-		throw GradeTooLowException("Cannot create form, because grade to execute too low!");
+		throw GradeTooLowException("Cannot create form " + name + ", because grade to execute too low!");
 	else if (toExec < 1)
-		throw GradeTooHighException("Cannot create form, because grade to execute too high!");
+		throw GradeTooHighException("Cannot create form " + name + ", because grade to execute too high!");
 }
 
 Form::Form( Form const &other ) : Name(other.Name), isSigned(other.isSigned), signGrade(other.signGrade), execGrade(other.execGrade) {}
@@ -49,6 +38,8 @@ Form::Form( Form const &other ) : Name(other.Name), isSigned(other.isSigned), si
 Form::~Form() {}
 
 Form &Form::operator=( Form const &other ) {
+	if (this == &other)
+		return *this;
 	this->isSigned = other.isSigned;
 	return *this;
 }
@@ -59,7 +50,7 @@ std::ostream &operator<<( std::ostream &out, Form const &form ) {
 		out << " is signed. ";
 	else
 		out << " is unsigned. ";
-	out << "To sign the form bureaucrat need " << form.getSignGrade() << " grade. ";
-	out << "To execute the form bureaucrat need " << form.getExecGrade() << " grade";
+	out << "To sign the form need bureaucrat with " << form.getSignGrade() << " grade. ";
+	out << "To execute the form need bureaucrat with " << form.getExecGrade() << " grade.";
 	return out;
 }

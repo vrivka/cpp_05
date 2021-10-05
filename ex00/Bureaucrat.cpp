@@ -30,7 +30,7 @@ void Bureaucrat::decrementGrade() {
 	}
 }
 
-Bureaucrat::Bureaucrat() : Name(), Grade(150) {}
+Bureaucrat::Bureaucrat() : Name("Noname"), Grade(150) {}
 
 Bureaucrat::Bureaucrat( std::string const &name, int grade ) : Name(name) {
 	if (grade < 1)
@@ -45,6 +45,8 @@ Bureaucrat::Bureaucrat( Bureaucrat const &other ) : Name(other.Name), Grade(othe
 Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat &Bureaucrat::operator=( Bureaucrat const &other ) {
+	if (this == &other)
+		return *this;
 	this->Grade = other.Grade;
 	return *this;
 }

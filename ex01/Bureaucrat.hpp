@@ -10,6 +10,7 @@ class Bureaucrat {
 private:
 	std::string const Name;
 	int Grade;
+	Bureaucrat();
 public:
 	class GradeTooHighException : public std::exception {
 	protected:
@@ -32,7 +33,6 @@ public:
 	void incrementGrade();
 	void decrementGrade();
 	void signForm( Form & ) const;
-	Bureaucrat();
 	Bureaucrat( std::string const &, int );
 	Bureaucrat( Bureaucrat const & );
 	~Bureaucrat();
