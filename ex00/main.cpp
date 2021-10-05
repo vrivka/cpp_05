@@ -2,7 +2,6 @@
 #include "Bureaucrat.hpp"
 
 int main() {
-	std::cout << "--------------------------------------------------------------\n";
 	{
 		try {
 			Bureaucrat vasya("Vasya", 151);
@@ -11,7 +10,7 @@ int main() {
 			std::cout << e.what() << std::endl;
 		}
 	}
-	std::cout << "--------------------------------------------------------------\n";
+	std::cout << "\n\n";
 	{
 		try {
 			Bureaucrat vasya("Vasya", -150);
@@ -20,7 +19,7 @@ int main() {
 			std::cout << e.what() << std::endl;
 		}
 	}
-	std::cout << "--------------------------------------------------------------\n";
+	std::cout << "\n\n";
 	{
 		try {
 			Bureaucrat vasya("Vasya", 1);
@@ -35,7 +34,7 @@ int main() {
 			std::cout << e.what() << std::endl;
 		}
 	}
-	std::cout << "--------------------------------------------------------------\n";
+	std::cout << "\n\n";
 	{
 		try {
 			Bureaucrat oleg("Oleg", 150);
@@ -50,7 +49,7 @@ int main() {
 			std::cout << e.what() << std::endl;
 		}
 	}
-	std::cout << "--------------------------------------------------------------\n";
+	std::cout << "\n\n";
 	{
 		try {
 			Bureaucrat misha("Misha", 1);
@@ -67,5 +66,4 @@ int main() {
 			std::cout << e.what() << std::endl;
 		}
 	}
-	std::cout << "--------------------------------------------------------------\n";
 }
