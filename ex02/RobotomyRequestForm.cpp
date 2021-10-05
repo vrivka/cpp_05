@@ -2,12 +2,12 @@
 
 void RobotomyRequestForm::execute( Bureaucrat const &executor ) const throw(std::exception) {
 	if (executor.getGrade() > this->execGrade)
-		throw GradeTooLowException("grade too low");
+		throw GradeTooLowException("bureaucrat's grade too low");
 	if (not this->isSigned)
-		throw std::runtime_error("form is not signed");
+		throw std::runtime_error("form " + this->getName() + " not signed");
 	std::cout << executor.getName() << " executes " << this->getName() << std::endl;
 	std::cout << "Brrrrrrrrrrrrt....\n";
-	srand(time(nullptr));
+	srand(time(NULL));
 	if (rand() % 2)
 		std::cout << this->target << " has been robotomized successfully\n";
 	else

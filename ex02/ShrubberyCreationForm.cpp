@@ -1,6 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
 
-void putTree(std::ofstream &ofs) {
+void ShrubberyCreationForm::putTree(std::ofstream &ofs) {
 	srand(time(nullptr));
 	switch (rand() % 3) {
 	case 0:
@@ -145,11 +145,13 @@ void putTree(std::ofstream &ofs) {
 
 void ShrubberyCreationForm::execute( Bureaucrat const &executor ) const throw(std::exception) {
 	if (executor.getGrade() > this->execGrade)
-		throw GradeTooLowException("grade too low");
+		throw GradeTooLowException("bureaucrat's grade too low");
 	if (not this->isSigned)
-		throw std::runtime_error("form not signed");
+		throw std::runtime_error("form " + this->getName() + " not signed");
+	std::cout << executor.getName() << " executes " << this->getName() << std::endl;
 	try {
 		std::ofstream ofs(this->target + "_shrubbery");
+
 		ofs.exceptions(std::ofstream::failbit | std::ofstream::badbit);
 		putTree(ofs);
 		ofs.close();
@@ -161,13 +163,15 @@ void ShrubberyCreationForm::execute( Bureaucrat const &executor ) const throw(st
 
 ShrubberyCreationForm::ShrubberyCreationForm() : Form("Shrubbery Creation", "none", false, 145, 137) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm( std::string const &target ) : Form("Shrubbery Creation", target, false, 145, 137){}
+ShrubberyCreationForm::ShrubberyCreationForm( std::string const &target ) : Form("Shrubbery Creation", target, false, 145, 137) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm( ShrubberyCreationForm const &other) : Form(other) {}
+ShrubberyCreationForm::ShrubberyCreationForm( ShrubberyCreationForm const &other ) : Form(other) {}
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=( ShrubberyCreationForm const &other ) {
+	if (this == &other)
+		return *this;
 	this->target = other.target;
 	this->isSigned = other.isSigned;
 	return *this;

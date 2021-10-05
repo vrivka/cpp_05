@@ -22,7 +22,7 @@ void Form::beSigned( Bureaucrat const &bureaucrat ) throw(Form::GradeTooLowExcep
 
 Form::Form() : Name("Default"), isSigned(false), signGrade(150), execGrade(150) {}
 
-Form::Form(const std::string &name, bool isSigned, int const &toSign, int const &toExec) : Name(name), isSigned(isSigned), signGrade(toSign), execGrade(toExec) {
+Form::Form(const std::string &name, bool isSigned, int toSign, int toExec) : Name(name), isSigned(isSigned), signGrade(toSign), execGrade(toExec) {
 	if (toSign > 150)
 		throw GradeTooLowException("Cannot create form " + name + ", because grade to sign too low!");
 	else if (toSign < 1)

@@ -13,6 +13,7 @@ protected:
 	bool isSigned;
 	int const signGrade;
 	int const execGrade;
+	Form();
 public:
 	class GradeTooHighException : public std::exception {
 	protected:
@@ -36,8 +37,7 @@ public:
 	int const &getExecGrade() const;
 	void beSigned( Bureaucrat const & ) throw(Form::GradeTooLowException);
 	virtual void execute( Bureaucrat const & ) const = 0;
-	Form();
-	Form( std::string const &, std::string const &, bool , int const &, int const &);
+	Form( std::string const &, std::string const &, bool , int, int);
 	Form( Form const & );
 	virtual ~Form();
 	Form &operator=( Form const & );

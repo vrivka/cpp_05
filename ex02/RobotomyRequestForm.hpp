@@ -8,9 +8,10 @@
 #include <unistd.h>
 
 class RobotomyRequestForm : public Form {
+private:
+	RobotomyRequestForm();
 public:
 	virtual void execute( Bureaucrat const & ) const throw(std::exception);
-	RobotomyRequestForm();
 	RobotomyRequestForm( std::string const & );
 	RobotomyRequestForm( RobotomyRequestForm const & );
 	virtual ~RobotomyRequestForm();

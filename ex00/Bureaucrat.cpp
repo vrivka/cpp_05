@@ -11,7 +11,7 @@ int Bureaucrat::getGrade() const { return this->Grade; }
 void Bureaucrat::incrementGrade() {
 	try {
 		if (this->Grade == 1)
-			throw GradeTooHighException("Cannot increment grade of bureaucrat " + this->Name + ", because his grade already highest!");
+			throw GradeTooHighException("Cannot increment grade of bureaucrat " + this->Name + ", because grade already highest!");
 		this->Grade--;
 	}
 	catch (std::exception &exeption) {
@@ -22,7 +22,7 @@ void Bureaucrat::incrementGrade() {
 void Bureaucrat::decrementGrade() {
 	try {
 		if (this->Grade == 150)
-			throw GradeTooLowException("Cannot decrement grade of bureaucrat " + this->Name + ", because his grade already lowest!");
+			throw GradeTooLowException("Cannot decrement grade of bureaucrat " + this->Name + ", because grade already lowest!");
 		this->Grade++;
 	}
 	catch (std::exception &exeption) {
@@ -34,9 +34,9 @@ Bureaucrat::Bureaucrat() : Name("Noname"), Grade(150) {}
 
 Bureaucrat::Bureaucrat( std::string const &name, int grade ) : Name(name) {
 	if (grade < 1)
-		throw GradeTooHighException("Cannot create bureaucrat " + name + ", because his grade to high!");
+		throw GradeTooHighException("Cannot create bureaucrat " + name + ", because grade to high!");
 	else if (grade > 150)
-		throw GradeTooLowException("Cannot create bureaucrat, " + name + "because his grade to low!");
+		throw GradeTooLowException("Cannot create bureaucrat, " + name + "because grade to low!");
 	this->Grade = grade;
 }
 

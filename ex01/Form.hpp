@@ -34,8 +34,8 @@ public:
 	bool getIsSigned() const;
 	int const &getSignGrade() const;
 	int const &getExecGrade() const;
-	void beSigned( Bureaucrat const & ) throw(GradeTooLowException);
-	Form( std::string const &name, bool isSigned, int const &toSign, int const &toExec);
+	void beSigned( Bureaucrat const & ) throw(Form::GradeTooLowException);
+	Form( std::string const &, bool, int, int );
 	Form( Form const & );
 	~Form();
 	Form &operator=( Form const & );
