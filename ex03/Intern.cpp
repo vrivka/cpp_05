@@ -15,11 +15,12 @@ Form *Intern::createPres( std::string const &target ) {
 	return new PresidentialPardonForm(target);
 }
 
-typedef Form *(Intern::*creationForm)( std::string const & );
+typedef Form *(Intern::*createFormfuncs)(std::string const & );
 
-Form *Intern::makeForm( std::string const & formName, std::string const &target ) {
-	creationForm forms[3] = {&Intern::createRobo, &Intern::createShru, &Intern::createPres};
+Form *Intern::makeForm( std::string const &formName, std::string const &target ) {
+	createFormfuncs forms[3] = {&Intern::createRobo, &Intern::createShru, &Intern::createPres};
 	std::string names[3] = {"robotomy request", "shrubbery creation", "presidential pardon"};
+
 	for (int i = 0; i < 3; i++)
 		if (names[i] == formName)
 			return (this->*forms[i])(target);
@@ -33,6 +34,6 @@ Intern::Intern( Intern const & ) {}
 
 Intern::~Intern() {}
 
-Intern &Intern::operator=( Intern const &other ) {
+Intern &Intern::operator=( Intern const & ) {
 	return *this;
 }

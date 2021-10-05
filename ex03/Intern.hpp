@@ -20,5 +20,4 @@ public:
 	Intern &operator=( Intern const & );
 };
 
-
 #endif

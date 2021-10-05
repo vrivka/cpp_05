@@ -4,12 +4,13 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 #include <fstream>
-#include <cstdlib>
 
 class ShrubberyCreationForm : public Form {
+private:
+	static void putTree(std::ofstream &ofs);
+	ShrubberyCreationForm();
 public:
 	virtual void execute( Bureaucrat const & ) const throw(std::exception);
-	ShrubberyCreationForm();
 	ShrubberyCreationForm( std::string const & );
 	ShrubberyCreationForm( ShrubberyCreationForm const & );
 	virtual ~ShrubberyCreationForm();

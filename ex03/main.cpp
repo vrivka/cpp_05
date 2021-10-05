@@ -8,19 +8,39 @@
 
 int main() {
 	try {
-		Bureaucrat vasya("Vasya", 60);
+		Form *form;
 		Intern aguzok;
-		Form *rrf;
+		Bureaucrat Boss("Boss", 1);
 
-		rrf = aguzok.makeForm("robotomy request", "bender");
-		std::cout << *rrf << std::endl;
-		vasya.executeForm(*rrf);
-		vasya.signForm(*rrf);
-		vasya.executeForm(*rrf);
-		delete rrf;
+		std::cout << Boss << std::endl;
+		std::cout << "\n\n";
+		form = aguzok.makeForm("robotomy request", "TV"); //				"robotomy request", "shrubbery creation", "presidential pardon"};
+		std::cout << "\n";
+		std::cout << *form << std::endl;
+		std::cout << "\n";
+		Boss.signForm(*form);
+		Boss.executeForm(*form);
+		delete form;
+		std::cout << "\n\n";
+		form = aguzok.makeForm("shrubbery creation", "roof");
+		std::cout << "\n";
+		std::cout << *form << std::endl;
+		std::cout << "\n";
+		Boss.signForm(*form);
+		Boss.executeForm(*form);
+		delete form;
+		std::cout << "\n\n";
+		form = aguzok.makeForm("presidential pardon", "Tanos");
+		std::cout << "\n";
+		std::cout << *form << std::endl;
+		std::cout << "\n";
+		Boss.signForm(*form);
+		Boss.executeForm(*form);
+		delete form;
+		std::cout << "\n\n";
+		form = aguzok.makeForm("gigantic", "Alice");
 	}
-	catch (std::exception &exception) {
-		std::cout << exception.what() << std::endl;
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
-	return 0;
 }

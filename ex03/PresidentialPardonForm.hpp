@@ -6,9 +6,10 @@
 #include <iostream>
 
 class PresidentialPardonForm : public Form {
+private:
+	PresidentialPardonForm();
 public:
 	virtual void execute( Bureaucrat const & ) const throw(std::exception);
-	PresidentialPardonForm();
 	PresidentialPardonForm( std::string const & );
 	PresidentialPardonForm( PresidentialPardonForm const & );
 	virtual ~PresidentialPardonForm();

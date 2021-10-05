@@ -1,10 +1,11 @@
-NAME = form
+NAME = intern
 
 SRCS =	Bureaucrat.cpp \
 		Form.cpp \
 		PresidentialPardonForm.cpp \
         RobotomyRequestForm.cpp \
         ShrubberyCreationForm.cpp \
+        Intern.cpp \
 		main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
@@ -16,16 +17,16 @@ RM = rm -f
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
-		@clang++ $(CFLAGS) -o $(NAME) $^
+		clang++ $(CFLAGS) -o $(NAME) $^
 
 %.o:	%.cpp
-		@clang++ $(CFLAGS) -c $< -o $@ -I.
+		clang++ $(CFLAGS) -c $< -o $@ -I.
 
 clean:
-		@$(RM) $(OBJS)
+		$(RM) $(OBJS)
 
 fclean:	clean
-		@$(RM) $(NAME)
+		$(RM) $(NAME)
 
 re:		fclean all
 
