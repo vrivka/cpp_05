@@ -12,16 +12,16 @@ RM = rm -f
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
-		@clang++ $(CFLAGS) -o $(NAME) $^
+		clang++ $(CFLAGS) -o $(NAME) $^
 
 %.o:	%.cpp
-		@clang++ $(CFLAGS) -c $< -o $@ -I.
+		clang++ $(CFLAGS) -c $< -o $@ -I.
 
 clean:
-		@$(RM) $(OBJS)
+		$(RM) $(OBJS)
 
 fclean:	clean
-		@$(RM) $(NAME)
+		$(RM) $(NAME)
 
 re:		fclean all
 

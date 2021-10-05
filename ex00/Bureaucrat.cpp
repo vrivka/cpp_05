@@ -1,37 +1,28 @@
 #include "Bureaucrat.hpp"
 
-const char *Bureaucrat::GradeTooHighException::what() const throw() {
-	return massage.c_str();
-}
+const char *Bureaucrat::GradeTooHighException::what() const throw() { return massage.c_str(); }
 
-const char *Bureaucrat::GradeTooLowException::what() const throw() {
-	return massage.c_str();
-}
+const char *Bureaucrat::GradeTooLowException::what() const throw() { return massage.c_str(); }
 
-std::string const &Bureaucrat::getName() const {
-	return this->Name;
-}
+std::string const &Bureaucrat::getName() const { return this->Name; }
 
-int Bureaucrat::getGrade() const {
-	return this->Grade;
-}
+int Bureaucrat::getGrade() const { return this->Grade; }
 
 void Bureaucrat::incrementGrade() {
 	try {
 		if (this->Grade == 1)
-			throw GradeTooHighException("Cannot increment grade, because its to high!");
+			throw GradeTooHighException("Cannot increment grade of bureaucrat " + this->Name + ", because his grade already highest!");
 		this->Grade--;
 	}
 	catch (std::exception &exeption) {
 		std::cout << exeption.what() << std::endl;
 	}
-
 }
 
 void Bureaucrat::decrementGrade() {
 	try {
 		if (this->Grade == 150)
-			throw GradeTooLowException("Cannot decrement grade, because its to low!");
+			throw GradeTooLowException("Cannot decrement grade of bureaucrat " + this->Name + ", because his grade already lowest!");
 		this->Grade++;
 	}
 	catch (std::exception &exeption) {
@@ -39,13 +30,13 @@ void Bureaucrat::decrementGrade() {
 	}
 }
 
-Bureaucrat::Bureaucrat() : Name("\"Mommy's bureaucrat\""), Grade(150) {}
+Bureaucrat::Bureaucrat() : Name(), Grade(150) {}
 
 Bureaucrat::Bureaucrat( std::string const &name, int grade ) : Name(name) {
 	if (grade < 1)
-		throw GradeTooHighException("Cannot create bureaucrat, because his grade to high!");
+		throw GradeTooHighException("Cannot create bureaucrat " + name + ", because his grade to high!");
 	else if (grade > 150)
-		throw GradeTooLowException("Cannot create bureaucrat, because his grade to low!");
+		throw GradeTooLowException("Cannot create bureaucrat, " + name + "because his grade to low!");
 	this->Grade = grade;
 }
 
@@ -59,6 +50,6 @@ Bureaucrat &Bureaucrat::operator=( Bureaucrat const &other ) {
 }
 
 std::ostream &operator<<( std::ostream &out, Bureaucrat const &bureaucrat ) {
-	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
+	out << bureaucrat.getName() << ", has grade " << bureaucrat.getGrade();
 	return out;
 }
