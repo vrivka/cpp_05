@@ -46,9 +46,9 @@ Bureaucrat::Bureaucrat() : Name("Noname"), Grade(150) {}
 
 Bureaucrat::Bureaucrat( std::string const &name, int grade ) : Name(name) {
 	if (grade < 1)
-		throw GradeTooHighException("Cannot create bureaucrat " + name + ", because grade to high!");
+		throw GradeTooHighException("Cannot create bureaucrat " + name + ", because grade too high!");
 	else if (grade > 150)
-		throw GradeTooLowException("Cannot create bureaucrat " + name + ", because grade to low!");
+		throw GradeTooLowException("Cannot create bureaucrat " + name + ", because grade too low!");
 	this->Grade = grade;
 }
 
